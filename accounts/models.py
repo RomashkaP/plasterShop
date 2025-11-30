@@ -15,6 +15,6 @@ class EmailVerificationCode(models.Model):
     @classmethod
     def generate_code(cls, user):
         cls.objects.filter(user=user).delete
-        code = str(random.randit(100000, 999999))
+        code = str(random.randint(100000, 999999))
         obj = cls.objects.create(user=user, code=code)
         return code

@@ -13,10 +13,13 @@
     {% endfor %}
 {% endif %}
 <hr>
-Введите код подтверждения из письма отправленного на "почта пользователя"
-<form method="post" action="accounts/email_code_confirmation">
-    <input type="number" id="email_code">
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
     <button type="submit">Подтвердить</button>
 </form>
+
+<p><a href="">Отправить код повторно</a></p>
 </body>
 </html>

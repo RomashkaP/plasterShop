@@ -57,5 +57,13 @@ class CustomRegisterForm(forms.Form):
         )
         return user
 
+class EmailVerificationForm(forms.Form):
+    code = forms.CharField(
+        label='Код подтверждения',
+        max_length=6,
+        min_length=6,
+        widget=forms.TextInput(attrs={'placeholder': '1234567'})
+    )
+
 
 
