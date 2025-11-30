@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Подтверждение электронной почты</title>
+</head>
+<body>
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+<hr>
+Введите код подтверждения из письма отправленного на "почта пользователя"
+<form method="post" action="accounts/email_code_confirmation">
+    <input type="number" id="email_code">
+    <button type="submit">Подтвердить</button>
+</form>
+</body>
+</html>

@@ -52,7 +52,8 @@ class CustomRegisterForm(forms.Form):
             first_name=self.cleaned_data['first_name'],
             last_name=self.cleaned_data['last_name'],
             email=self.cleaned_data['email'],
-            password=self.cleaned_data['password1']
+            password=self.cleaned_data['password1'],
+            is_active=False
         )
         return user
 
