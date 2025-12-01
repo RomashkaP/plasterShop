@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.contrib.auth.password_validation import validate_password
 
-
+# Форма для регистрации пользователя.
 class CustomRegisterForm(forms.Form):
     first_name = forms.CharField(max_length=35, label='Имя')
     last_name = forms.CharField(max_length=35, label='Фамилия')
@@ -34,7 +34,7 @@ class CustomRegisterForm(forms.Form):
     def clean_password1(self):
         password = self.cleaned_data.get('password1')
         try:
-            validate_password(password)
+            validate_password(password) # Функция валидации пароля django.
         except ValidationError as e:
             raise ValidationError(e.messages)
         return password
@@ -53,10 +53,11 @@ class CustomRegisterForm(forms.Form):
             last_name=self.cleaned_data['last_name'],
             email=self.cleaned_data['email'],
             password=self.cleaned_data['password1'],
-            is_active=False
+            is_active=False # Создаем со значением False для реализации методов подтверждения данных пользователя.
         )
         return user
 
+# Форма для кода подтверждения.
 class EmailVerificationForm(forms.Form):
     code = forms.CharField(
         label='Код подтверждения',
@@ -64,6 +65,7 @@ class EmailVerificationForm(forms.Form):
         min_length=6,
         widget=forms.TextInput(attrs={'placeholder': '1234567'})
     )
+
 
 
 

@@ -19,7 +19,13 @@
     {{ form.as_p }}
     <button type="submit">Подтвердить</button>
 </form>
+<hr>
+Пoвторно запросить код:
+<form method="post" action="{% url 'send_conf_code_again' %}">
+    {% csrf_token %}
+    <input type="email" name="email" placeholder="example@mail.ru">
+    <button type="submit">Отправить</button>
+</form>
 
-<p><a href="">Отправить код повторно</a></p>
 </body>
 </html>
