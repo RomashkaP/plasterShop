@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница пользователя</title>
+</head>
+<body>
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+<hr>
+<h1>Профиль пользователя: {{ request.user.username}}</h1>
+<p>{{ request.user.first_name }}</p>
+<p>{{ request.user.last_name }}</p>
+<p>{{ request.user.email }}</p>
+<a href="{% url 'logout' %}">Выйти из аккаунта</a>
+</body>
+</html>

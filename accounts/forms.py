@@ -66,6 +66,14 @@ class EmailVerificationForm(forms.Form):
         widget=forms.TextInput(attrs={'placeholder': '1234567'})
     )
 
+# Форма для логина.
+class LoginForm(forms.Form):
+    email = forms.EmailField(label='Email')
+    password = forms.CharField(
+        label='Пароль',
+        widget=forms.PasswordInput,
+        min_length=10
+    )
 
 
 

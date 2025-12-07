@@ -10,5 +10,7 @@
         {{ form.as_p }}
         <button type="submit">Зарегистрироваться</button>
     </form>
+    <hr>
+    <a href="{% url 'email_code_confirmation' %}">Ввести код подтверждения</a>
 </body>
 </html>
