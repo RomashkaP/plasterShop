@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.contrib.auth.password_validation import validate_password
+from django.contrib.auth.forms import SetPasswordForm
 
 # Форма для регистрации пользователя.
 class CustomRegisterForm(forms.Form):
@@ -75,5 +76,11 @@ class LoginForm(forms.Form):
         min_length=10
     )
 
+# Форма для ввода email для смены пароля.
+class EmailInputReplacePasswordForm(forms.Form):
+    email = forms.EmailField(label='Email')
 
+# Форма для ввода нового пароля.
+class ResetPasswordForm(SetPasswordForm):
+    pass
 

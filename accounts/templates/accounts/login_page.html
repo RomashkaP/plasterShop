@@ -19,5 +19,20 @@
     {{ form.as_p }}
     <button type="submit">Войти</button>
 </form>
+<hr>
+    <div class='auth'>
+        <p><a href="{% url 'social:begin' 'google-oauth2' %}">Войти через Google</a></p>
+        <p><a href="{% url 'social:begin' 'yandex-oauth2' %}">Войти через Yandex</a></p>
+    </div>
+<hr>
+<a href="{% url 'registration' %}">Зарегистрироваться</a>
+<hr>
+<h3>Забыли пароль?</h3>
+Введите вашу эл. почту для отправки кода подтверждения.
+    <form method=post action={% url 'send_code_reset_password' %}>
+        {% csrf_token %}
+        {{ prform.as_p }}
+        <button type="submit">Отправить код</button>
+    </form>
 </body>
 </html>

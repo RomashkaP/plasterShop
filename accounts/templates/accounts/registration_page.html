@@ -5,12 +5,20 @@
     <title>Страница регистрации.</title>
 </head>
 <body>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Зарегистрироваться</button>
-    </form>
-    <hr>
-    <a href="{% url 'email_code_confirmation' %}">Ввести код подтверждения</a>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Зарегистрироваться</button>
+</form>
+<hr>
+<a href="{% url 'email_code_confirmation' %}">Ввести код подтверждения</a>
+<hr>
+<div class='auth'>
+    <p><a href="{% url 'social:begin' 'google-oauth2' %}">Зарегистрироваться через Google</a></p>
+    <p><a href="{% url 'social:begin' 'yandex-oauth2' %}">Зарегистрироваться через Yandex</a></p>
+</div>
+<hr>
+<a href="{% url 'login' %}">Войти в аккаунт</a>
+
 </body>
 </html>

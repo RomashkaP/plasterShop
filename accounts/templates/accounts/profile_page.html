@@ -17,6 +17,7 @@
 <p>{{ request.user.first_name }}</p>
 <p>{{ request.user.last_name }}</p>
 <p>{{ request.user.email }}</p>
-<a href="{% url 'logout' %}">Выйти из аккаунта</a>
+<a href="{% url 'main_page' %}">Главная</a>
+<p><a href="{% url 'logout' %}">Выйти из аккаунта</a></p>
 </body>
 </html>

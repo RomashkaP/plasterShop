@@ -14,10 +14,10 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 
-load_dotenv()
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv()
 
 
 # Quick-start development settings - unsuitable for production
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
+    'social_django'
 ]
 
 MIDDLEWARE = [
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware'
 ]
 
 ROOT_URLCONF = 'plaster_shop.urls'
@@ -67,6 +69,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect'
             ],
         },
     },
@@ -140,3 +144,21 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# Настройка бэкенда аутентификации
+SOCIAL_AUTH_YANDEX_OAUTH2_KEY=os.getenv('SOCIAL_AUTH_YANDEX_OAUTH2_KEY')
+SOCIAL_AUTH_YANDEX_OAUTH2_SECRET=os.getenv('SOCIAL_AUTH_YANDEX_OAUTH2_SECRET')
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.yandex.YandexOAuth2',
+    'django.contrib.auth.backends.ModelBackend'
+)
+
+# Перенаправление после входа
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
