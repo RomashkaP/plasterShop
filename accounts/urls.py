@@ -1,7 +1,5 @@
 from django.urls import path
-from .views import register, email_code_confirmation_view, send_confirmation_code_again, \
-    profile_page_view, login_view, logout_view, send_code_reset_password_view, confirmation_code_reset_password, \
-    reset_password_view
+from .views import *
 
 
 

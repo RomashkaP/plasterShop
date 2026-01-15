@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Подтверждение электронной почты</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}
+<h1>Подтверждение электронной почты</h1>
+{% endblock %}
+
+{% block content %}
+
 {% if messages %}
     {% for message in messages %}
         <div class="alert alert-success">
@@ -28,5 +29,7 @@
 </form>
 <hr>
 <a href="{% url 'registration' %}">Вернуться на страницу регистрации</a>
-</body>
-</html>
+
+{% endblock %}
+
+

@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Главня страница</title>
-</head>
-<body>
-<h1>Главная страница</h1>
+{% extends "base.html" %}
+
+{% block title %}
+    <title>Главная страница</title>
+{% endblock %}
+
+{% block content %}
 {% if messages %}
     {% for message in messages %}
         <div class="alert alert-success">
@@ -16,10 +15,8 @@
 <hr>
 {% if request.user.is_authenticated %}
     <h4>Здравствуйте {{ request.user.first_name }} {{ request.user.last_name }}</h4>
-    <a href="{% url 'profile_page' %}">Страница пользователя</a>
 {% else %}
     <a href="{% url 'login' %}">Войти в профиль</a>
     <a href="{% url 'registration' %}">Зарегистрироваться</a>
 {% endif %}
-</body>
-</html>
+{% endblock %}

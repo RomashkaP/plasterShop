@@ -48,7 +48,7 @@ def email_code_confirmation_view(request):
                     user.is_active = True
                     user.save()
                     verification.delete() # Удаляем код подтверждения из БД.
-                    login(request, user) # Логиним пользователя
+                    login(request, user, backend='django.contrib.auth.backends.ModelBackend') # Логиним пользователя
                     return redirect('profile_page') # Перенаправляем нa страницу пользователя.
             except EmailVerificationCode.DoesNotExist:
                 form.add_error('code', 'Неверный код.')

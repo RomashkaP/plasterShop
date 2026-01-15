@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Страница пользователя</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}
+<h1>Страница пользователя</h1>
+{% endblock %}
+
+{% block content %}
+
 {% if messages %}
     {% for message in messages %}
         <div class="alert alert-success">
@@ -19,5 +20,6 @@
 <p>{{ request.user.email }}</p>
 <a href="{% url 'main_page' %}">Главная</a>
 <p><a href="{% url 'logout' %}">Выйти из аккаунта</a></p>
-</body>
-</html>
+
+{% endblock %}
+

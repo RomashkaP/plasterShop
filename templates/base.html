@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block style %}
+
+    {% endblock %}
+    {% block title %}
+        <title>Мой сайт</title>
+    {% endblock %}
+</head>
+<body>
+    <!-- Шапка сайта -->
+    {% include 'header.html' %}
+
+    <!-- Основное содержимое страницы -->
+    <main>
+        {% block content %}
+        <!-- Сюда будет подставляться контент из других шаблонов -->
+        {% endblock %}
+    </main>
+
+    <!-- Подвал сайта -->
+    {% include 'footer.html' %}
+</body>
+</html>

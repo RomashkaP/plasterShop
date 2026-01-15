@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Страница авторизации</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}
+<h1>Страница авторизации</h1>
+{% endblock %}
+
+{% block content %}
+
 {% if messages %}
     {% for message in messages %}
         <div class="alert alert-success">
@@ -34,5 +35,6 @@
         {{ prform.as_p }}
         <button type="submit">Отправить код</button>
     </form>
-</body>
-</html>
+
+{% endblock %}
+

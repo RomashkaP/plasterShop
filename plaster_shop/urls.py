@@ -18,11 +18,20 @@ from django.contrib import admin
 from django.urls import path, include
 from .views import main_page_view
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Приложении регистрации и авторизации.
     path('accounts/', include('accounts.urls')),
     # Главная страница
     path('', main_page_view, name='main_page'),
-    path('social-auth/', include('social_django.urls', namespace='social'))
+    # Приложения для авторизации через социальные сети.
+    path('social-auth/', include('social_django.urls', namespace='social')),
+    # Приложения блога
+    path('blog/', include('blog_app.urls'))
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
