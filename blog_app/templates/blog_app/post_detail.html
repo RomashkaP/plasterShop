@@ -1,0 +1,262 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<style>
+    .posts-wrapper {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        background: #f9f9fb;
+        border-radius: 12px;
+    }
+
+    /* Общий стиль карточки поста */
+    .post-card {
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 12px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease;
+    }
+
+    .post-card:hover {
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .post-title {
+        margin: 10px 0;
+        font-size: 1.6em;
+        color: #2c3e50;
+        font-weight: 600;
+    }
+
+    .post-image {
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin: 15px 0;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .post-text {
+        color: #555;
+        line-height: 1.7;
+        font-size: 1.05em;
+        margin: 15px 0;
+    }
+
+    .post-date {
+        color: #7f8c8d;
+        font-size: 0.9em;
+        margin: 5px 0;
+    }
+
+    .post-separator {
+        border: 0;
+        border-top: 1px solid #ecf0f1;
+        margin: 25px 0;
+    }
+
+    /* === СТИЛИ ДЛЯ КОММЕНТАРИЕВ === */
+
+    .comments {
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #ecf0f1;
+        color: #34495e;
+    }
+
+    .comments h3 {
+        color: #2c3e50;
+        font-size: 1.4em;
+        margin: 20px 0 15px;
+        font-weight: 600;
+    }
+
+    .comment {
+        background: #f8f9fa;
+        border-left: 4px solid #3498db;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 6px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        transition: background 0.2s ease;
+    }
+
+    .comment:hover {
+        background: #f1f3f5;
+    }
+
+    .comment h2 {
+        margin: 0 0 5px;
+        font-size: 1.1em;
+        color: #2980b9;
+        font-weight: 600;
+    }
+
+    .comment h4 {
+        margin: 0 0 8px;
+        font-size: 0.85em;
+        color: #7f8c8d;
+    }
+
+    .comment p,
+    .comment {
+        color: #555;
+        line-height: 1.6;
+    }
+
+    /* Форма добавления комментария */
+    .comment-form {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+        border: 1px dashed #bdc3c7;
+    }
+
+    .comment-form h3 {
+        color: #2c3e50;
+        margin-bottom: 12px;
+        font-size: 1.2em;
+    }
+
+    .comment-form textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-family: Arial, sans-serif;
+        font-size: 0.95em;
+        resize: vertical;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+        transition: border 0.3s ease;
+    }
+
+    .comment-form textarea:focus {
+        border-color: #3498db;
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+    }
+
+    .comment-form input[type="submit"] {
+        background: #3498db;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-size: 0.9em;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .comment-form input[type="submit"]:hover {
+        background: #2980b9;
+    }
+
+    /* Аватарка (заглушка) */
+    .comment-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #3498db;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 0.9em;
+        margin-right: 10px;
+        flex-shrink: 0;
+    }
+
+    /* Линия между комментариями */
+    .comment + .comment {
+        margin-top: 10px;
+    }
+
+    /* Адаптивность */
+    @media (max-width: 600px) {
+        .posts-wrapper {
+            padding: 15px;
+        }
+        .post-image {
+            height: 300px;
+        }
+        .comment {
+            padding: 12px;
+        }
+        .comment-form textarea {
+            font-size: 0.9em;
+        }
+    }
+</style>
+{% endblock %}
+
+
+
+{% block title %}
+    <title>Блог</title>
+{% endblock %}
+
+{% block content %}
+    <div class="posts-wrapper">
+        <div class="post-card">
+            <h5 class="post-title">{{ post.title }}</h5>
+            {% if post.image %}
+                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image">
+            {% endif %}
+            <p class="post-text">{{ post.text }}</p>
+            <hr class="post-separator">
+            <h6 class="post-date">Дата публикации: {{ post.time_in | date:'d' }}. {{ post.time_in | date:'m' }}. 
+                {{ post.time_in | date:'Y' }} | {{ post.time_in | date:'G:i' }}</h6>
+            <h6 class="post-date">Просмотров: {{ post.views }}</h6>
+        </div>
+        <hr>
+        <div class="comments">
+            {% if request.user.is_authenticated %}   
+                <div class="comment-form">
+                    <h3>Оставить комментарий</h3> 
+                    <form action="{% url 'comment_create' pk=post.id %}" method="post">
+                        {% csrf_token %}
+                        <textarea 
+                            id="comment_text" 
+                            name="comment_text" 
+                            rows="5" 
+                            placeholder="Напишите ваш комментарий..."></textarea>
+                        <input type="submit" value="Отправить">
+                    </form>
+                </div>
+            {% else %}
+                <p><a href="{% url 'login' %}">Войдите</a>, чтобы оставить комментарий.</p>
+            {% endif %}
+
+            <h3>Комментарии ({{ comments|length }}):</h3>
+
+            {% if comments %}
+                {% for comment in comments %}
+                    <div class="comment">
+                        <div style="display: flex; align-items: flex-start; gap: 10px;">
+                            <div class="comment-avatar">
+                                {{ comment.user.username|first|upper }}
+                            </div>
+                            <div style="flex: 1;">
+                                <h2>{{ comment.user.username }}</h2>
+                                <h4>{{ comment.time_in|date:'d M Y H:i' }}</h4>
+                                <p style="margin: 5px 0; white-space: pre-wrap;">{{ comment.text }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Пока нет комментариев. Будьте первым!</p>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

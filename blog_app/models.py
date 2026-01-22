@@ -7,6 +7,11 @@ class Post(models.Model):
     text = models.TextField()
     time_in = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to='post_images/', blank=True, null=True)
+    # Счетчик просмотров поста
+    views = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.title
 
 # Модель комментария
 class Comment(models.Model):

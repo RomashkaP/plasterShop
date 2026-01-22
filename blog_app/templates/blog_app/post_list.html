@@ -82,7 +82,10 @@
                         <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image">
                     {% endif %}
                     <p class="post-text">{{ post.text |truncatechars_html:500 | safe }}</p>
-                    <h6 class="post-date">Дата публикации: {{ post.time_in | date:'d M Y' }}</h6>
+                    <h6 class="post-date">Дата публикации: {{ post.time_in | date:'d' }}. {{ post.time_in | date:'m' }}. 
+            {{ post.time_in | date:'Y' }} | {{ post.time_in | date:'G:i' }}</h6>
+            <h6 class="post-date">Просмотров: {{ post.views }}</h6>
+            <h6 class="post-date">Комментариев: {{ post.comments_count }}</h6>
                 </div>
                 <hr class="post-separator">
             {% endfor %}
