@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Витрина</title>
+{% endblock %}
+
+{% block content %}
+    <div class="posts-wrapper">
+        {% if products %}
+            {% for product in products %}
+                <div class="post-card">
+
+                    {% if product.images.all %}
+                        <img src="{{ product.get_first_image }}" alt="{{ product.title }}" class="post-image">
+                    {% endif %}
+                    <h4 class="post-title"><a href="{{ product.id }}">{{ product.title }}</a></h4>
+                    <h3>{{ product.price }} руб.</h3>
+
+                </div>
+                <hr class="post-separator">
+            {% endfor %}
+        {% else %}
+            <p>Пока нет записей.</p>
+        {% endif %}
+    </div>
+{% endblock %}

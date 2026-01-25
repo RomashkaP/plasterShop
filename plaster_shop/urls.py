@@ -30,7 +30,9 @@ urlpatterns = [
     # Приложения для авторизации через социальные сети.
     path('social-auth/', include('social_django.urls', namespace='social')),
     # Приложения блога
-    path('blog/', include('blog_app.urls'))
+    path('blog/', include('blog_app.urls')),
+    # Приложения витрины
+    path('showcase/', include('showcase_app.urls')),
 ]
 
 if settings.DEBUG:

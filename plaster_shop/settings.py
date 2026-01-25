@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'accounts',
     'social_django',
     'blog_app',
+    'showcase_app',
 ]
 
 MIDDLEWARE = [
