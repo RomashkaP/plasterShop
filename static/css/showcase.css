@@ -1,0 +1,41 @@
+/* static/css/showcase.css */
+.connection {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.connection a {
+    display: inline-block;
+    background: #27ae60;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s;
+}
+
+.connection a:hover {
+    background: #219653;
+}
+
+.catrgories, .sort {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+.sort h3, .catrgories h3 {
+    margin: 10px 0;
+}
+
+.sort a {
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+.sort a:hover {
+    color: #3498db;
+}

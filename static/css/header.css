@@ -1,0 +1,111 @@
+/* Фиксированная высота хедера */
+.site-header {
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid #E8E4E0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: box-shadow 0.3s ease;
+
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+/* Контейнер: логотип слева, меню — справа */
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* Ключ: слева — лого, справа — меню */
+    align-items: center;
+    height: 100%;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0; /* Не даст логотипу сжаться */
+}
+
+.logo-img {
+    height: 60px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.logo-link:hover .logo-img {
+    transform: scale(1.03);
+}
+
+/* Навигация — справа */
+.main-nav .nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.nav-link {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+    font-size: 1.05em;
+    color: #555;
+    text-decoration: none;
+    position: relative;
+    padding: 0.5rem 0;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #D4C8B5;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0.4rem;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #D4C8B5;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .site-header {
+        height: 60px;
+        padding: 0 1rem;
+    }
+
+    .header-container {
+        /* На мобильных — вертикальное выравнивание */
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+
+    .logo-img {
+        height: 50px;
+    }
+
+    .main-nav .nav-list {
+        gap: 1.2rem;
+        flex-wrap: wrap;
+    }
+
+    .nav-link {
+        font-size: 0.95em;
+        padding: 0.4rem 0;
+    }
+}

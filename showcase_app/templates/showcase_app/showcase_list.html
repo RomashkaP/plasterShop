@@ -1,10 +1,33 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/showcase.css' %}">
+{% endblock %}
 
 {% block title %}
     <title>Витрина</title>
 {% endblock %}
 
 {% block content %}
+    <hr>
+    <div class="catrgories">
+        <h2>Категории:</h2>
+        {% if categories %}
+            {% for category in categories %}
+                <h3>
+                    <a href="?category={{ category.id }}" >{{ category.title }}</a>
+                </h3>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <hr>
+    <div class="sort">
+        <h2>Сортировка</h2>
+        <h3><a href="?{% if current_category %}category={{ current_category }}&{% endif %}sort=price_dec">Дороже</a></h3>
+        <h3><a href="?{% if current_category %}category={{ current_category }}&{% endif %}sort=price_inc">Дешевле</a></h3>
+    </div>
+    <hr>
     <div class="posts-wrapper">
         {% if products %}
             {% for product in products %}

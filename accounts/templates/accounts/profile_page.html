@@ -1,7 +1,12 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/accounts.css' %}">
+{% endblock %}
 
 {% block title %}
-<h1>Страница пользователя</h1>
+<title>Страница пользователя</title>
 {% endblock %}
 
 {% block content %}
@@ -18,7 +23,6 @@
 <p>{{ request.user.first_name }}</p>
 <p>{{ request.user.last_name }}</p>
 <p>{{ request.user.email }}</p>
-<a href="{% url 'main_page' %}">Главная</a>
 <p><a href="{% url 'logout' %}">Выйти из аккаунта</a></p>
 
 {% endblock %}

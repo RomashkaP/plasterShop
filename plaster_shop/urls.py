@@ -26,7 +26,7 @@ urlpatterns = [
     # Приложении регистрации и авторизации.
     path('accounts/', include('accounts.urls')),
     # Главная страница
-    path('', main_page_view, name='main_page'),
+    # path('', main_page_view, name='main_page'),
     # Приложения для авторизации через социальные сети.
     path('social-auth/', include('social_django.urls', namespace='social')),
     # Приложения блога

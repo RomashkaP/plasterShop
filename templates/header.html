@@ -1,14 +1,15 @@
-<header style="background-color: #333; color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;">
-    <div class="logo">
-        МойСайт.ру
+{% load static %}
+<header class="site-header">
+    <div class="header-container">
+        <a href="{% url 'showcase_list' %}" class="logo-link">
+            <img src="{% static 'img/logo.png' %}" alt="Логотип PlotnikovaShop" class="logo-img">
+        </a>
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li><a href="{% url 'showcase_list' %}" class="nav-link">Витрина</a></li>
+                <li><a href="{% url 'post_list' %}" class="nav-link">Блог автора</a></li>
+                <li><a href="{% url 'profile_page' %}" class="nav-link">Профиль</a></li>
+            </ul>
+        </nav>
     </div>
-    <nav>
-        <ul style="list-style: none; display: flex; gap: 1.5rem; margin: 0; padding: 0;">
-            <li><a href="/" style="color: white; text-decoration: none; font-weight: 500;">Главная</a></li>
-            <li><a href="{% url 'profile_page' %}" 
-                style="color: white; text-decoration: none; font-weight: 500;">Профиль</a></li>
-            <li><a href="{% url 'post_list' %}" style="color: white; text-decoration: none; font-weight: 500;">Блог</a></li>
-            <li><a href="{% url 'showcase_list' %}" style="color: white; text-decoration: none; font-weight: 500;">Витрина</a></li>
-        </ul>
-    </nav>
 </header>
