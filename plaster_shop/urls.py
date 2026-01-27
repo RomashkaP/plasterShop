@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import main_page_view
+from showcase_app.views import ShowcaseView
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -26,13 +26,13 @@ urlpatterns = [
     # Приложении регистрации и авторизации.
     path('accounts/', include('accounts.urls')),
     # Главная страница
-    # path('', main_page_view, name='main_page'),
+    # path('', ShowcaseView.as_view(), name='home_showcase'),
     # Приложения для авторизации через социальные сети.
     path('social-auth/', include('social_django.urls', namespace='social')),
     # Приложения блога
     path('blog/', include('blog_app.urls')),
     # Приложения витрины
-    path('showcase/', include('showcase_app.urls')),
+    path('', include('showcase_app.urls')),
 ]
 
 if settings.DEBUG:

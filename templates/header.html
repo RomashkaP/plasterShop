@@ -1,15 +1,33 @@
+<!-- plaster_shop/templates/header.html -->
 {% load static %}
 <header class="site-header">
-    <div class="header-container">
-        <a href="{% url 'showcase_list' %}" class="logo-link">
-            <img src="{% static 'img/logo.png' %}" alt="Логотип PlotnikovaShop" class="logo-img">
-        </a>
-        <nav class="main-nav">
-            <ul class="nav-list">
-                <li><a href="{% url 'showcase_list' %}" class="nav-link">Витрина</a></li>
-                <li><a href="{% url 'post_list' %}" class="nav-link">Блог автора</a></li>
-                <li><a href="{% url 'profile_page' %}" class="nav-link">Профиль</a></li>
-            </ul>
-        </nav>
+    <div class="container">
+        <div class="header-grid">
+            <!-- Левая часть: логотип -->
+            <div class="header-left">
+                <a href="{% url 'showcase_list' %}" class="logo-link">
+                    Тут будет логотип
+                </a>
+            </div>
+
+            <!-- Правая часть: меню -->
+            <nav class="header-right">
+                <ul class="nav-list">
+                    <li><a href="{% url 'showcase_list' %}" class="nav-link">Витрина</a></li>
+                    <li><a href="{% url 'post_list' %}" class="nav-link">Блог автора</a></li>
+                    <li class="nav-item">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'profile_page' %}" class="avatar-badge" title="Мой профиль">
+                                {{ user.username|first|upper }}
+                            </a>
+                        {% else %}
+                            <a href="{% url 'login' %}" class="avatar-badge login-icon" title="Войти">
+                                🔐
+                            </a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
 </header>

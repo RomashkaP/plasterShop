@@ -6,44 +6,76 @@
 {% endblock %}
 
 {% block title %}
-    <title>Витрина</title>
+    <title>Витрина — plotnikovashop.ru</title>
 {% endblock %}
 
 {% block content %}
-    <hr>
-    <div class="catrgories">
-        <h2>Категории:</h2>
-        {% if categories %}
-            {% for category in categories %}
-                <h3>
-                    <a href="?category={{ category.id }}" >{{ category.title }}</a>
-                </h3>
-            {% endfor %}
-        {% endif %}
-    </div>
-    <hr>
-    <div class="sort">
-        <h2>Сортировка</h2>
-        <h3><a href="?{% if current_category %}category={{ current_category }}&{% endif %}sort=price_dec">Дороже</a></h3>
-        <h3><a href="?{% if current_category %}category={{ current_category }}&{% endif %}sort=price_inc">Дешевле</a></h3>
-    </div>
-    <hr>
-    <div class="posts-wrapper">
-        {% if products %}
-            {% for product in products %}
-                <div class="post-card">
-
-                    {% if product.images.all %}
-                        <img src="{{ product.get_first_image }}" alt="{{ product.title }}" class="post-image">
+    <div class="container">
+        <!-- Основной макет: Товары слева, Категории+Сортировка справа -->
+        <div class="main-row">
+            <!-- Левая часть: Сетка товаров -->
+            <div class="products-wrapper">
+                <div class="products-grid">
+                    {% if products %}
+                        {% for product in products %}
+                            <a href="{{ product.id }}" class="product-card-link">
+                                <article class="product-card">
+                                    <div class="product-image-wrapper">
+                                        {% if product.images.all %}
+                                            <img src="{{ product.get_first_image }}" alt="{{ product.title }}" class="product-image">
+                                        {% else %}
+                                            <div class="product-image-placeholder">Нет изображения</div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="product-info">
+                                        <h4 class="product-title">{{ product.title }}</h4>
+                                        <p class="product-price">{{ product.price }} ₽</p>
+                                    </div>
+                                </article>
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                        <p class="no-products">Пока нет товаров в этой категории.</p>
                     {% endif %}
-                    <h4 class="post-title"><a href="{{ product.id }}">{{ product.title }}</a></h4>
-                    <h3>{{ product.price }} руб.</h3>
-
                 </div>
-                <hr class="post-separator">
-            {% endfor %}
-        {% else %}
-            <p>Пока нет записей.</p>
-        {% endif %}
+            </div>
+
+            <!-- Правая панель: Категории и Сортировка -->
+            <aside class="sidebar">
+                <!-- Категории -->
+                <div class="categories-widget">
+                    <h2 class="widget-title">Категории</h2>
+                    {% if categories %}
+                        <ul class="categories-list">
+                            <li class="category-item {% if not request.GET.category %}active{% endif %}">
+                                <a href="?">Все товары</a>
+                            </li>
+                            {% for category in categories %}
+                                <li class="category-item {% if request.GET.category == category.id|stringformat:"s" %}active{% endif %}">
+                                    <a href="?category={{ category.id }}">{{ category.title }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>Категорий пока нет.</p>
+                    {% endif %}
+                </div>
+
+                <!-- Сортировка -->
+                <div class="sort-controls">
+                    <h3 class="sort-title">Сортировка</h3>
+                    <div class="sort-options">
+                        <a href="?{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}sort=price_inc"
+                           class="sort-link {% if request.GET.sort == 'price_inc' %}active{% endif %}">
+                            Дешевле
+                        </a>
+                        <a href="?{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}sort=price_dec"
+                           class="sort-link {% if request.GET.sort == 'price_dec' %}active{% endif %}">
+                            Дороже
+                        </a>
+                    </div>
+                </div>
+            </aside>
+        </div>
     </div>
 {% endblock %}

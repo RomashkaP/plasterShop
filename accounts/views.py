@@ -119,7 +119,7 @@ def login_view(request):
 # Представление для выхода из профиля.
 def logout_view(request):
     logout(request)
-    return redirect('main_page')
+    return redirect('showcase_list')
 
 
 # Представление отправки кода для смены пароля.

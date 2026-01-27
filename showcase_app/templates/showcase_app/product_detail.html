@@ -1,25 +1,144 @@
+<!-- showcase_app/templates/showcase_app/product_detail.html -->
 {% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/product_detail.css' %}">
+{% endblock %}
 
 {% block title %}
-    <title>{{ product.title }}</title>
+    <title>{{ product.title }} — plotnikovashop.ru</title>
 {% endblock %}
 
 {% block content %}
-    <div class="posts-wrapper">
-        <div class="post-card">
-            <h2 class="post-title">{{ product.title }}</h2>
-            {% for image in product.images.all %}
-                <img src="{{ image.image.url }}" alt="{{ product.title }}" class="post-image">
-            {% endfor %}
-            <p>{{ product.description }}</p>
-            <h3>Характеристики:</h3>
-            <p>Высота - {{ product.characteristics.height }} см.</p>
-            <p>Ширина - {{ product.characteristics.width }} см.</p>
-            <p>Вес - {{ product.characteristics.weight }} гр.</p>
-            <p>Материал - {{ product.characteristics.material }}</p>
-            <h3>{{ product.price }} руб.</h3>
+    <div class="container">
+        <div class="product-detail-container">
+            <!-- Галерея -->
+            <div class="gallery">
+                <!-- Основное изображение -->
+                <div class="main-image-wrapper">
+                    {% if product.images.all %}
+                        <img 
+                            src="{{ product.get_first_image }}" 
+                            alt="{{ product.title }}"
+                            class="main-image"
+                            id="mainImage"
+                            loading="lazy"
+                        >
+                    {% else %}
+                        <div class="main-image-placeholder">
+                            <span>Изображение отсутствует</span>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Миниатюры -->
+                {% if product.images.all|length > 1 %}
+                    <div class="thumbnails">
+                        {% for image in product.images.all %}
+                            <img 
+                                src="{{ image.image.url }}" 
+                                alt="Миниатюра {{ forloop.counter }}"
+                                class="thumbnail"
+                                onclick="changeMainImage('{{ image.image.url }}')"
+                            >
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Описание товара -->
+            <div class="product-info">
+                <h1 class="product-title">{{ product.title }}</h1>
+                <p class="product-price">{{ product.price }} ₽</p>
+
+                <div class="product-description">
+                    <h3>Описание</h3>
+                    <p>{{ product.description|linebreaks }}</p>
+                </div>
+
+                <!-- Характеристики -->
+                <div class="product-specs">
+                    <h3>Характеристики</h3>
+                    <ul class="specs-list">
+                        <li><strong>Высота:</strong> {{ product.characteristics.height }} см</li>
+                        <li><strong>Ширина:</strong> {{ product.characteristics.width }} см</li>
+                        <li><strong>Вес:</strong> {{ product.characteristics.weight }} г</li>
+                        <li><strong>Материал:</strong> {{ product.characteristics.material }}</li>
+                    </ul>
+                </div>
+
+                <!-- Кнопка Telegram -->
+                <a href="https://t.me/your_username" target="_blank" class="btn-telegram">
+                    <img src="{% static 'img/telegram.png' %}" alt="Telegram" class="telegram-icon">
+                    Написать в Telegram
+                </a>
+            </div>
         </div>
-        <div class="connection"><a href="">Написать в телеграмм</a></div>
-        <hr class="post-separator">
+    </div>
+
+    <!-- Модальное окно для увеличения изображения -->
+    <div id="imageModal" class="modal">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="zoomedImage">
     </div>
 {% endblock %}
+
+
+{% block extra_js %}
+<script>
+    // Переключение основного изображения
+    function changeMainImage(src) {
+        document.getElementById('mainImage').src = src;
+    }
+
+    // Увеличение изображения
+    const mainImage = document.getElementById('mainImage');
+    const modal = document.getElementById('imageModal');
+    const zoomedImage = document.getElementById('zoomedImage');
+
+    let isZoomed = false;
+
+    // Открытие модального окна с изображением
+    mainImage.onclick = function () {
+        modal.style.display = "flex";
+        zoomedImage.src = this.src;
+        zoomedImage.classList.remove('zoomed');
+        isZoomed = false;
+    };
+
+    // Закрытие модального окна
+    function closeModal() {
+        modal.style.display = "none";
+        zoomedImage.classList.remove('zoomed');
+        isZoomed = false;
+    }
+
+    // Переключение зума по клику
+    zoomedImage.onclick = function (e) {
+        e.stopPropagation(); // Не закрываем модальное окно
+        if (isZoomed) {
+            this.classList.remove('zoomed');
+            isZoomed = false;
+        } else {
+            this.classList.add('zoomed');
+            isZoomed = true;
+        }
+    };
+
+    // Закрытие при клике вне изображения
+    modal.onclick = function (event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+    };
+
+    // Закрытие по клавише Esc
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+</script>
+{% endblock %}
+

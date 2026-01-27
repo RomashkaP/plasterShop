@@ -1,41 +1,256 @@
-/* static/css/showcase.css */
-.connection {
-    margin: 20px 0;
-    text-align: center;
+/* ----------------------------
+   СТИЛИ ВИТРИНЫ — ЧИСТАЯ ВЕРСТКА (ОБНОВЛЁННАЯ КОМПОНОВКА)
+   ---------------------------- */
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
 }
 
-.connection a {
-    display: inline-block;
-    background: #27ae60;
-    color: white;
-    padding: 12px 24px;
-    border-radius: 6px;
+/* --- ОСНОВНАЯ СТРОКА: Товары + Категории/Сортировка --- */
+.main-row {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 2rem;
+}
+
+/* --- ЛЕВАЯ ЧАСТЬ: СЕТКА ТОВАРОВ --- */
+.products-wrapper {
+    flex: 1;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.8rem;
+}
+
+/* --- ПРАВАЯ ПАНЕЛЬ: Категории + Сортировка --- */
+.sidebar {
+    flex: 0 0 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Виджет категорий */
+.categories-widget {
+    background: #F5F1ED;
+    padding: 1.5rem 1rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.widget-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.1em;
+    color: #333;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-bottom: 0.3rem;
+}
+
+.widget-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(to right, #D4C8B5, #E8E4E0);
+}
+
+.categories-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.category-item {
+    margin-bottom: 0.8rem;
+}
+
+.category-item a {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.95em;
+    color: #555;
     text-decoration: none;
+    padding: 0.5rem 0.8rem;
+    display: block;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    background: white;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.category-item a:hover {
+    background: #E8F0E9;
+    color: #333;
+    transform: translateX(4px);
+}
+
+.category-item.active a {
+    background: #D4C8B5;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(212, 200, 181, 0.3);
+}
+
+/* Виджет сортировки */
+.sort-controls {
+    background: #F5F1ED;
+    border: 1px solid #E8E4E0;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    padding: 1.2rem;
+}
+
+.sort-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.1em;
+    color: #333;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-bottom: 0.3rem;
+}
+
+.sort-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(to right, #D4C8B5, #E8E4E0);
+}
+
+.sort-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.sort-link {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.95em;
+    color: #555;
+    text-decoration: none;
+    padding: 0.5rem 0.8rem;
+    display: block;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    background: white;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.sort-link:hover {
+    background: #E8F0E9;
+    color: #333;
+    transform: translateX(4px);
+}
+
+.sort-link.active {
+    background: #D4C8B5;
+    color: white;
+    border-color: #C8BBA5;
+    font-weight: 600;
+    cursor: default;
+    transform: scale(1.02);
+}
+
+/* --- КАРТОЧКИ ТОВАРОВ --- */
+.product-card-link {
+    text-decoration: none;
+}
+
+.product-card {
+    background: #F5F1ED;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 20px rgba(212, 200, 181, 0.15);
+    border: 1px solid #D4C8B5;
+}
+
+.product-image-wrapper {
+    height: 240px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #F5F1ED, #FFFFFF);
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.05);
+}
+
+.product-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #E8E4E0, #F5F1ED);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    font-size: 0.9em;
+}
+
+.product-info {
+    padding: 1.2rem;
+    text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-title {
+    font-family: 'Poppins', sans-serif;
     font-weight: 500;
-    transition: background 0.3s;
+    font-size: 1.1em;
+    color: #333;
+    margin: 0 0 0.5rem;
+    line-height: 1.4;
 }
 
-.connection a:hover {
-    background: #219653;
+.product-price {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1.1em;
+    color: #000;
+    margin: 0;
 }
 
-.catrgories, .sort {
-    margin: 20px 0;
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    border: 1px solid #eee;
-}
+/* --- АДАПТИВНОСТЬ --- */
+@media (max-width: 900px) {
+    .main-row {
+        flex-direction: column;
+    }
 
-.sort h3, .catrgories h3 {
-    margin: 10px 0;
-}
+    .sidebar {
+        flex: none;
+        max-width: 100%;
+        order: 1;
+    }
 
-.sort a {
-    color: #2c3e50;
-    font-weight: 500;
-}
-
-.sort a:hover {
-    color: #3498db;
+    .products-wrapper {
+        order: 0;
+    }
 }

@@ -1,38 +1,52 @@
 <!-- plaster_shop/templates/footer.html -->
 {% load static %}
 <footer class="site-footer">
-    <div class="footer-container">
-        <!-- О сайте -->
-        <div class="footer-section">
-            <h3 class="footer-title">О сайте</h3>
-            <p class="footer-text">
-                Я создаю полезные и красивые вещи вручную. Каждое изделие — результат любви к деталям и натуральным материалам.
-            </p>
-        </div>
+    <!-- Используем тот же .container, что и в хедере -->
+    <div class="container">
+        <div class="footer-grid">
+            <!-- О сайте -->
+            <div class="footer-section">
+                <h3 class="footer-title">О сайте</h3>
+                <p class="footer-text">
+                    Я создаю полезные и красивые вещи вручную. Каждое изделие — результат любви к деталям и натуральным материалам.
+                </p>
+            </div>
 
-        <!-- Ссылки -->
-        <div class="footer-section">
-            <h3 class="footer-title">Ссылки</h3>
-            <ul class="footer-links">
-                <li><a href="/">Главная</a></li>
-                <li><a href="/about/">О нас</a></li>
-                <li><a href="/services/">Услуги</a></li>
-                <li><a href="/privacy/">Политика конфиденциальности</a></li>
-            </ul>
-        </div>
+            <!-- Соцсети вместо "Ссылки" -->
+            <div class="footer-section">
+                <h3 class="footer-title">Мы в соцсетях</h3>
+                <ul class="social-list">
+                    <li class="social-item">
+                        <a href="https://t.me/mysite" target="_blank" class="social-link" title="Telegram">
+                            <img src="{% static 'img/telegram.png' %}" alt="Telegram" class="social-icon">
+                        </a>
+                    </li>
+                    <li class="social-item">
+                        <a href="https://vk.com/mysite" target="_blank" class="social-link" title="ВКонтакте">
+                            <img src="{% static 'img/vkontakte.png' %}" alt="ВКонтакте" class="social-icon">
+                        </a>
+                    </li>
+                    <li class="social-item">
+                        <a href="https://instagram.com/mysite" target="_blank" class="social-link" title="Instagram">
+                            <img src="{% static 'img/instagram.png' %}" alt="Instagram" class="social-icon">
+                        </a>
+                    </li>
+                </ul>
+            </div>
 
-        <!-- Контакты -->
-        <div class="footer-section">
-            <h3 class="footer-title">Контакты</h3>
-            <address class="footer-contact">
-                Email: <a href="mailto:info@mysite.ru">info@mysite.ru</a><br>
-                Телефон: +7 (123) 456-78-90<br>
-                г. Москва, Россия
-            </address>
+            <!-- Контакты -->
+            <div class="footer-section">
+                <h3 class="footer-title">Контакты</h3>
+                <address class="footer-contact">
+                    Email: <a href="mailto:info@mysite.ru">info@mysite.ru</a><br>
+                    Телефон: +7 (123) 456-78-90<br>
+                    г. Москва, Россия
+                </address>
+            </div>
         </div>
     </div>
 
-    <!-- Копирайт -->
+    <!-- Копирайт под контейнером -->
     <div class="footer-bottom">
         <p>&copy; 2026 plotnikovashop.ru. Все права защищены.</p>
     </div>
