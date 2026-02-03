@@ -6,35 +6,40 @@
 {% endblock %}
 
 {% block title %}
-<h1>Подтверждение электронной почты</h1>
+    <title>Подтверждение почты — plotnikovashop.ru</title>
 {% endblock %}
 
 {% block content %}
+    <div class="auth-container">
+        <h1 class="auth-title">Подтверждение электронной почты</h1>
 
-{% if messages %}
-    {% for message in messages %}
-        <div class="alert alert-success">
-            {{ message }}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Подтвердить код</button>
+        </form>
+
+        <div class="divider"></div>
+
+        <form method="post" action="{% url 'send_conf_code_again' %}" class="auth-form">
+            {% csrf_token %}
+            <p>
+                <label for="id_email">Email:</label>
+                <input type="email" id="id_email" name="email" placeholder="example@mail.ru" required>
+            </p>
+            <button type="submit">Отправить код повторно</button>
+        </form>
+
+        <div class="divider"></div>
+
+        <div class="auth-links">
+            <p><a href="{% url 'registration' %}">Вернуться к регистрации</a></p>
         </div>
-    {% endfor %}
-{% endif %}
-<hr>
-
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Подтвердить</button>
-</form>
-<hr>
-Пoвторно запросить код:
-<form method="post" action="{% url 'send_conf_code_again' %}">
-    {% csrf_token %}
-    <input type="email" name="email" placeholder="example@mail.ru">
-    <button type="submit">Отправить</button>
-</form>
-<hr>
-<a href="{% url 'registration' %}">Вернуться на страницу регистрации</a>
-
+    </div>
 {% endblock %}
-
-

@@ -247,10 +247,10 @@
     .sidebar {
         flex: none;
         max-width: 100%;
-        order: 1;
+        order: 0;
     }
 
     .products-wrapper {
-        order: 0;
+        order: 1;
     }
 }

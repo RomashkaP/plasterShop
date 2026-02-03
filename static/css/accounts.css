@@ -1,41 +1,177 @@
-/* static/css/auth.css */
-.alert {
-    background: #d4edda;
-    color: #155724;
-    padding: 10px 15px;
-    border-radius: 6px;
-    border: 1px solid #c3e6cb;
-    margin: 10px 0;
+/* ----------------------------
+   СТИЛИ АВТОРИЗАЦИИ — В СТИЛЕ САЙТА
+   ---------------------------- */
+
+.auth-container {
+    max-width: 500px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background: #F5F1ED;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
-form {
-    margin: 10px 0;
+.auth-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.6em;
+    color: #333;
+    text-align: center;
+    margin: 0 0 1.5rem;
 }
 
-form p {
-    margin: 8px 0;
+.auth-form p {
+    margin: 0.8rem 0;
+    font-family: 'Open Sans', sans-serif;
 }
 
-form input[type="email"],
-form input[type="text"],
-form input[type="password"] {
+.auth-form label {
+    display: block;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.95em;
+    color: #555;
+    margin-bottom: 0.4rem;
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="email"],
+.auth-form input[type="password"] {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
+    padding: 0.8rem;
+    border: 1px solid #E8E4E0;
+    border-radius: 8px;
+    background: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1em;
+    color: #555;
     box-sizing: border-box;
 }
 
-form button {
-    background: #3498db;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-top: 10px;
+.auth-form input:focus {
+    outline: none;
+    border-color: #D4C8B5;
+    box-shadow: 0 0 0 2px rgba(212, 200, 181, 0.2);
 }
 
-form button:hover {
-    background: #2980b9;
+.auth-form button {
+    margin-top: 1rem;
+    padding: 0.7rem 1.4rem;
+    background: #D4C8B5;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    
+}
+
+.auth-form button:hover {
+    background: #C8BBA5;
+     transform: translateY(-1px);
+}
+
+.auth-links {
+    text-align: center;
+    margin: 1.5rem 0;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.95em;
+    color: #b6945f;
+}
+
+.auth-links a {
+    color: #b6945f;
+    text-decoration: none;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+.social-auth {
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.social-auth p {
+    margin: 0.6rem 0;
+}
+
+.social-auth a {
+    font-family: 'Open Sans', sans-serif;
+    color: #b6945f;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+
+
+.yandex-icon {
+    width: 22px;
+    height: 22px;
+    margin-left: 6px;
+    vertical-align: middle;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.1));
+}
+
+.alert {
+    background: #e8f5e8;
+    color: #2e7d32;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #c8e6c9;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.95em;
+    text-align: center;
+    margin: 0 0 1.5rem;
+}
+
+.divider {
+    border: 0;
+    border-top: 1px dashed #e2b384;
+    margin: 1.8rem 0;
+}
+
+/* --- АДАПТИВНОСТЬ --- */
+@media (max-width: 520px) {
+    .auth-container {
+        margin: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .auth-title {
+        font-size: 1.4em;
+    }
+}
+
+/* --- БЛОК С КОТОМ --- */
+.cat-block {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    border: 1px solid #E8E4E0;
+}
+
+.cat-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: 0 auto 1rem;
+    display: block;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    background: transparent;
+}
+
+.cat-text {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.95em;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0 0.5rem;
 }

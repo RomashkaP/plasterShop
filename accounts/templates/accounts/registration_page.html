@@ -6,25 +6,43 @@
 {% endblock %}
 
 {% block title %}
-<h1>Страница регистрациии</h1>
+    <title>Регистрация — plotnikovashop.ru</title>
 {% endblock %}
 
 {% block content %}
+    <div class="auth-container">
+        <div class="cat-block">
+            <img src="{% static 'img/cat3.jfif' %}" class="cat-img">
+            <p class="cat-text">
+                Пока что, пройдя регистрацию, вы сможете оставлять комментарии в блоге автора.
+                Но аккаунт на нашем сайте понадобится вам в ближайшем будущем, так как
+                мы планируем добавить корзину товаров и систему оплаты заказов прямо на сайте.
+            </p>
+        </div>
+        <h1 class="auth-title">Регистрация</h1>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Зарегистрироваться</button>
-</form>
-<hr>
-<a href="{% url 'email_code_confirmation' %}">Ввести код подтверждения</a>
-<hr>
-<div class='auth'>
-    <p><a href="{% url 'social:begin' 'google-oauth2' %}">Зарегистрироваться через Google</a></p>
-    <p><a href="{% url 'social:begin' 'yandex-oauth2' %}">Зарегистрироваться через Yandex</a></p>
-</div>
-<hr>
-<a href="{% url 'login' %}">Войти в аккаунт</a>
+        <div class="divider"></div>
+        <div class="social-auth">
+            <p>                
+                <a href="{% url 'social:begin' 'yandex-oauth2' %}">
+                    Зарегистрироваться через Yandex
+                    <img src="{% static 'img/yandex.webp' %}" class="yandex-icon">
+                </a>
+            </p>
+        </div>
+        <div class="divider"></div>
 
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Зарегистрироваться</button>
+        </form>
+
+        <div class="divider"></div>
+
+        <div class="auth-links">
+            <p><a href="{% url 'login' %}">Уже есть аккаунт? Войти</a></p>
+            <p><a href="{% url 'email_code_confirmation' %}">Подтвердить почту</a></p>
+        </div>
+    </div>
 {% endblock %}
-

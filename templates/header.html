@@ -6,7 +6,7 @@
             <!-- Левая часть: логотип -->
             <div class="header-left">
                 <a href="{% url 'showcase_list' %}" class="logo-link">
-                    Тут будет логотип
+                    LOGO
                 </a>
             </div>
 
@@ -21,8 +21,8 @@
                                 {{ user.username|first|upper }}
                             </a>
                         {% else %}
-                            <a href="{% url 'login' %}" class="avatar-badge login-icon" title="Войти">
-                                🔐
+                            <a href="{% url 'registration' %}" class="nav-link">
+                                Вход/Регистрация
                             </a>
                         {% endif %}
                     </li>

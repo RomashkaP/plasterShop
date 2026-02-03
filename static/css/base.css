@@ -11,12 +11,18 @@
 }
 
 /* ГРИД ДЛЯ ХЕДЕРА И КОНТЕНТА */
-.header-grid,
 .showcase-grid {
     display: grid;
     grid-template-columns: 220px 1fr;
     gap: 2.5rem;
     align-items: center;
+}
+
+.header-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 /* Адаптивность */

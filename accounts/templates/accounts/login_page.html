@@ -6,40 +6,46 @@
 {% endblock %}
 
 {% block title %}
-<h1>Страница авторизации</h1>
+    <title>Вход в аккаунт — plotnikovashop.ru</title>
 {% endblock %}
 
 {% block content %}
-
-{% if messages %}
-    {% for message in messages %}
-        <div class="alert alert-success">
-            {{ message }}
+    <div class="auth-container">
+        <div class="cat-block">
+            <img src="{% static 'img/cat3.jfif' %}" class="cat-img">
+            <p class="cat-text">
+                Пока что, пройдя регистрацию, вы сможете оставлять комментарии в блоге автора.
+                Но аккаунт на нашем сайте понадобится вам в ближайшем будущем, так как
+                мы планируем добавить корзину товаров и систему оплаты заказов прямо на сайте.
+            </p>
         </div>
-    {% endfor %}
-{% endif %}
-<hr>
-<h1>Введите данные:</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Войти</button>
-</form>
-<hr>
-    <div class='auth'>
-        <p><a href="{% url 'social:begin' 'google-oauth2' %}">Войти через Google</a></p>
-        <p><a href="{% url 'social:begin' 'yandex-oauth2' %}">Войти через Yandex</a></p>
+        <h1 class="auth-title">Вход в аккаунт</h1>
+
+        <div class="divider"></div>
+
+        <div class="social-auth">
+            <p><a href="{% url 'social:begin' 'yandex-oauth2' %}">Войти через Yandex<img src="{% static 'img/yandex.webp' %}" class="yandex-icon"></a></p>
+        </div>
+
+        <div class="divider"></div>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Войти</button>
+        </form>
+
+        <div class="divider"></div>
+        
+        <div class="auth-links">
+            <p><a href="{% url 'registration' %}">Нет аккаунта? Зарегистрироваться</a></p>
+            <p><a href="{% url 'send_code_reset_password' %}">Забыли пароль?</a></p>
+        </div>
     </div>
-<hr>
-<a href="{% url 'registration' %}">Зарегистрироваться</a>
-<hr>
-<h3>Забыли пароль?</h3>
-Введите вашу эл. почту для отправки кода подтверждения.
-    <form method=post action={% url 'send_code_reset_password' %}>
-        {% csrf_token %}
-        {{ prform.as_p }}
-        <button type="submit">Отправить код</button>
-    </form>
-
 {% endblock %}
-

@@ -6,24 +6,38 @@
 {% endblock %}
 
 {% block title %}
-<title>Страница пользователя</title>
+    <title>Профиль — plotnikovashop.ru</title>
 {% endblock %}
 
 {% block content %}
-
-{% if messages %}
-    {% for message in messages %}
-        <div class="alert alert-success">
-            {{ message }}
+    <div class="auth-container">
+        <div class="cat-block">
+            <img src="{% static 'img/cat3.jfif' %}" class="cat-img">
+            <p class="cat-text">
+                Пока что, пройдя регистрацию, вы сможете оставлять комментарии в блоге автора.
+                Но аккаунт на нашем сайте понадобится вам в ближайшем будущем, так как
+                мы планируем добавить корзину товаров и систему оплаты заказов прямо на сайте.
+            </p>
         </div>
-    {% endfor %}
-{% endif %}
-<hr>
-<h1>Профиль пользователя: {{ request.user.username}}</h1>
-<p>{{ request.user.first_name }}</p>
-<p>{{ request.user.last_name }}</p>
-<p>{{ request.user.email }}</p>
-<p><a href="{% url 'logout' %}">Выйти из аккаунта</a></p>
+        <h1 class="auth-title">Профиль пользователя</h1>
 
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="auth-form">
+            <p><strong>Имя пользователя:</strong> {{ request.user.username }}</p>
+            <p><strong>Имя:</strong> {{ request.user.first_name }}</p>
+            <p><strong>Фамилия:</strong> {{ request.user.last_name }}</p>
+            <p><strong>Email:</strong> {{ request.user.email }}</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="auth-links">
+            <p><a href="{% url 'logout' %}">Выйти из аккаунта</a></p>
+        </div>
+    </div>
 {% endblock %}
-

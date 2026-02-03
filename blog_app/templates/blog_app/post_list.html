@@ -6,28 +6,70 @@
 {% endblock %}
 
 {% block title %}
-    <title>Блог</title>
+    <title>Блог автора — plotnikovashop.ru</title>
 {% endblock %}
 
 {% block content %}
-    <div class="posts-wrapper">
-        {% if posts %}
-            {% for post in posts %}
-                <div class="post-card">
-                    <h5 class="post-title"><a href="{{ post.id }}">{{ post.title }}</a></h5>
-                    {% if post.image %}
-                        <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image">
+    <div class="container">
+        <div class="posts-wrapper">
+            {% if posts %}
+                {% for post in posts %}
+                    <a href="{% url 'post_detail' post.id %}" class="post-card-link">
+                        <article class="post-card">
+                            <!-- Заголовок -->
+                            <h3 class="post-title">{{ post.title }}</h3>
+
+                            <!-- Изображение -->
+                            {% if post.image %}
+                                <div class="post-image-wrapper">
+                                    <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image">
+                                </div>
+                            {% endif %}
+
+                            <!-- Текст превью -->
+                            <div class="post-content">
+                                <p class="post-text">{{ post.text|truncatechars_html:300|safe }}</p>
+                            </div>
+
+                            <!-- Информация о публикации -->
+                            <div class="post-meta">
+                                <span class="post-date">
+                                    {{ post.time_in|date:'d.m.Y' }} | {{ post.time_in|date:'H:i' }}
+                                </span>
+                                <span class="post-stats">
+                                    Просмотров: {{ post.views }} | Комментариев: {{ post.comments_count }}
+                                </span>
+                            </div>
+                        </article>
+                    </a>
+                    <hr class="post-separator">
+                {% endfor %}
+            {% else %}
+                <p class="no-posts">Пока нет записей в блоге.</p>
+            {% endif %}
+        </div>
+
+        {% if is_paginated %}
+            <div class="pagination-container">
+                <ul class="pagination">
+                    <!-- Ссылка на первую страницу -->
+                    {% if page_obj.has_previous %}
+                        <li><a href="?page=1">&laquo; Первая</a></li>
+                        <li><a href="?page={{ page_obj.previous_page_number }}">Назад</a></li>
                     {% endif %}
-                    <p class="post-text">{{ post.text |truncatechars_html:500 | safe }}</p>
-                    <h6 class="post-date">Дата публикации: {{ post.time_in | date:'d' }}. {{ post.time_in | date:'m' }}. 
-            {{ post.time_in | date:'Y' }} | {{ post.time_in | date:'G:i' }}</h6>
-            <h6 class="post-date">Просмотров: {{ post.views }}</h6>
-            <h6 class="post-date">Комментариев: {{ post.comments_count }}</h6>
-                </div>
-                <hr class="post-separator">
-            {% endfor %}
-        {% else %}
-            <p>Пока нет записей в блоге.</p>
+
+                    <!-- Текущая страница и соседи (опционально) -->
+                    <li class="current">
+                        Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+                    </li>
+
+                    <!-- Ссылка на следующую -->
+                    {% if page_obj.has_next %}
+                        <li><a href="?page={{ page_obj.next_page_number }}">Вперёд</a></li>
+                        <li><a href="?page={{ page_obj.paginator.num_pages }}">Последняя &raquo;</a></li>
+                    {% endif %}
+                </ul>
+            </div>
         {% endif %}
     </div>
 {% endblock %}

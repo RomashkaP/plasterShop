@@ -9,6 +9,7 @@ class PostListView(ListView):
     template_name = 'blog_app/post_list.html'
     context_object_name = 'posts'
     ordering = '-time_in'
+    paginate_by = 10
 
     def get_queryset(self): # Переопределение метода get_queryset для подсчета комментариев
         return Post.objects.annotate(  # Функция annotate позволяет добавить поле в модель

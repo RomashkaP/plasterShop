@@ -6,62 +6,84 @@
 {% endblock %}
 
 {% block title %}
-    <title>Блог</title>
+    <title>{{ post.title }} — plotnikovashop.ru</title>
 {% endblock %}
 
 {% block content %}
-    <div class="posts-wrapper">
-        <div class="post-card">
-            <h5 class="post-title">{{ post.title }}</h5>
-            {% if post.image %}
-                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image">
-            {% endif %}
-            <p class="post-text">{{ post.text }}</p>
-            <hr class="post-separator">
-            <h6 class="post-date">Дата публикации: {{ post.time_in | date:'d' }}. {{ post.time_in | date:'m' }}. 
-                {{ post.time_in | date:'Y' }} | {{ post.time_in | date:'G:i' }}</h6>
-            <h6 class="post-date">Просмотров: {{ post.views }}</h6>
-        </div>
-        <hr>
-        <div class="comments">
-            {% if request.user.is_authenticated %}   
-                <div class="comment-form">
-                    <h3>Оставить комментарий</h3> 
-                    <form action="{% url 'comment_create' pk=post.id %}" method="post">
-                        {% csrf_token %}
-                        <textarea 
-                            id="comment_text" 
-                            name="comment_text" 
-                            rows="5" 
-                            placeholder="Напишите ваш комментарий..."></textarea>
-                        <input type="submit" value="Отправить">
-                    </form>
+    <div class="container">
+        <div class="post-detail-wrapper">
+            <!-- Карточка статьи -->
+            <article class="post-card">
+                <h1 class="post-title">{{ post.title }}</h1>
+
+                {% if post.image %}
+                    <div class="post-image-wrapper">
+                        <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image">
+                    </div>
+                {% endif %}
+
+                <div class="post-content">
+                    <p class="post-text">{{ post.text }}</p>
                 </div>
-            {% else %}
-                <p><a href="{% url 'login' %}">Войдите</a>, чтобы оставить комментарий.</p>
-            {% endif %}
 
-            <h3>Комментарии ({{ comments|length }}):</h3>
+                <div class="post-meta">
+                    <span class="post-date">
+                        {{ post.time_in|date:'d.m.Y' }} | {{ post.time_in|date:'H:i' }}
+                    </span>
+                    <span class="post-stats">
+                        Просмотров: {{ post.views }}
+                    </span>
+                </div>
+            </article>
 
-            {% if comments %}
-                {% for comment in comments %}
-                    <div class="comment">
-                        <div style="display: flex; align-items: flex-start; gap: 10px;">
-                            <div class="comment-avatar">
-                                {{ comment.user.username|first|upper }}
+            <hr class="post-separator">
+
+            <!-- Комментарии -->
+            <div class="comments-section">
+                {% if request.user.is_authenticated %}
+                    <div class="comment-form">
+                        <h3 class="comment-form-title">Оставить комментарий</h3>
+                        <form action="{% url 'comment_create' pk=post.id %}" method="post">
+                            {% csrf_token %}
+                            <textarea 
+                                id="comment_text" 
+                                name="comment_text" 
+                                rows="5" 
+                                placeholder="Напишите ваш комментарий..."
+                                class="comment-textarea"
+                            ></textarea>
+                            <button type="submit" class="comment-submit-btn">Отправить</button>
+                        </form>
+                    </div>
+                {% else %}
+                    <p class="comment-login-prompt">
+                        <a href="{% url 'login' %}">Войдите</a>, чтобы оставить комментарий.
+                    </p>
+                {% endif %}
+
+                <h3 class="comments-title">Комментарии ({{ comments|length }}):</h3>
+
+                {% if comments %}
+                    {% for comment in comments %}
+                        <div class="comment-item">
+                            <div class="comment-header">
+                                <div class="comment-avatar">
+                                    {{ comment.user.username|first|upper }}
+                                </div>
+                                <div class="comment-author-info">
+                                    <strong>{{ comment.user.username }}</strong>
+                                    <span class="comment-date">{{ comment.time_in|date:'d M Y H:i' }}</span>
+                                </div>
                             </div>
-                            <div style="flex: 1;">
-                                <h2>{{ comment.user.username }}</h2>
-                                <h4>{{ comment.time_in|date:'d M Y H:i' }}</h4>
-                                <p style="margin: 5px 0; white-space: pre-wrap;">{{ comment.text }}</p>
+                            <div class="comment-body">
+                                <p>{{ comment.text|linebreaks }}</p>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <p>Пока нет комментариев. Будьте первым!</p>
-            {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <p class="no-comments">Пока нет комментариев. Будьте первым!</p>
+                {% endif %}
+            </div>
         </div>
     </div>
-
 {% endblock %}
