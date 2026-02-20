@@ -1,14 +1,13 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib import messages
-from .forms import CustomRegisterForm, EmailVerificationForm, LoginForm, EmailInputReplacePasswordForm,\
-    ResetPasswordForm
+from .forms import *
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.conf import settings
 from .models import EmailVerificationCode
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 
 
 # Представление для регистрации и отправки кода подтвержденния на эл. почту.
@@ -106,7 +105,7 @@ def login_view(request):
 
             if user is not None:# Если пользователь существует и пароли совпадают:
                 login(request, user)# Логиним.
-                return redirect('main_page')
+                return redirect('profile_page')
             else:
                 messages.error(request, 'Неверно введен email или пароль. Попробуйте снова.')
                 return redirect('login')
@@ -205,8 +204,21 @@ def reset_password_view(request):
     else:
         form = ResetPasswordForm(user)
         return render(request, 'accounts/reset_password_page.html', {'form': form})
-                
 
+# Представление для смены имени пользователя                
+def change_username(request):
+    if request.method == 'POST':
+        form = ChangeUsernameForm(request.POST)
+        if form.is_valid():
+            new_username = form.cleaned_data['username']
+            user = request.user
+            user.username = new_username
+            user.save()
+            messages.success(request, 'Имя пользователя успешно изменено.')
+            return redirect('profile_page')
+    else:
+        form = ChangeUsernameForm()
+    return render(request, 'accounts/change_username_page.html', {'form': form})
 
 
 

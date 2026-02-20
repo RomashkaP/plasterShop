@@ -22,4 +22,6 @@ urlpatterns = [
     path('confirmation_code_reset_password/', confirmation_code_reset_password, name='confirmation_code_reset_password'),
     # Смена пароля.
     path('reset_password/', reset_password_view, name='reset_password'),
-]
+    # Смена имени пользователя.
+    path('change_username/', change_username, name='change_username'),
+    ]

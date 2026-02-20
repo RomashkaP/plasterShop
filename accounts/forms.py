@@ -84,3 +84,12 @@ class EmailInputReplacePasswordForm(forms.Form):
 class ResetPasswordForm(SetPasswordForm):
     pass
 
+# Форма для ввода нового имени пользователя
+class ChangeUsernameForm(forms.Form):
+    username = forms.CharField(max_length=50, label='Новое имя пользователя')
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if User.objects.filter(username=username).exists():
+            raise ValidationError('Пользователь с таким именем уже зарегистрирован.')
+        return username

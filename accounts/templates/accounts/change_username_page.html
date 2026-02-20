@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/accounts.css' %}">
+{% endblock %}
+
+{% block title %}
+    <title>Смена имени пользователя</title>
+{% endblock %}
+
+{% block content %}
+    <div class="auth-container">
+        <h1 class="auth-title">Смена имени пользователя:</h1>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Сменить имя пользователя</button>
+        </form>
+
+        <div class="divider"></div>
+
+        <div class="auth-links">
+            <p><a href="{% url 'profile_page' %}">Вернуться на страницу пользователя</a></p>
+        </div>
+    </div>
+{% endblock %}

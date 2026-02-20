@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView 
 from django.db.models import Count
+from django.contrib.auth.decorators import login_required, permission_required
 from .models import *
 
 # Дженерик для просмотра всех статей
@@ -41,6 +42,7 @@ class PostDetailView(DetailView):
         return context
 
 # Представление для создания комментария
+@login_required
 def create_comment_view(request, pk):
     user = request.user
     text = request.POST.get('comment_text')

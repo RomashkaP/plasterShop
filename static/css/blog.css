@@ -220,6 +220,23 @@
     margin: 3rem 0;
 }
 
+.post-meta .fas {
+    color: #6c757d;
+    font-size: 0.9em;
+}
+
+.post-meta .post-stats {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* расстояние между иконками */
+    margin-left: 12px;
+}
+
+.post-meta .post-stats i {
+    display: flex;
+    align-items: center;
+}
+
 /* --- ФОРМА КОММЕНТАРИЯ --- */
 .comment-form {
     margin: 2rem 0;

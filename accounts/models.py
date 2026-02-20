@@ -20,3 +20,4 @@ class EmailVerificationCode(models.Model):
         code = str(random.randint(100000, 999999))
         obj = cls.objects.create(user=user, code=code)
         return code
+

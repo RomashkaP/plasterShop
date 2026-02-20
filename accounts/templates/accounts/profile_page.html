@@ -19,6 +19,18 @@
                 мы планируем добавить корзину товаров и систему оплаты заказов прямо на сайте.
             </p>
         </div>
+
+        <!-- 🔐 Блок для администраторов -->
+        {% if request.user.is_staff %}
+            <div class="admin-panel-block">
+                <h3>Админ-панель</h3>
+                <p>
+                    <a href="{% url 'admin:index' %}">Перейти в панель администратора</a>
+                </p>
+            </div>
+        {% endif %}
+        <!-- Конец блока для админов -->
+
         <h1 class="auth-title">Профиль пользователя</h1>
 
         {% if messages %}
@@ -32,6 +44,12 @@
             <p><strong>Имя:</strong> {{ request.user.first_name }}</p>
             <p><strong>Фамилия:</strong> {{ request.user.last_name }}</p>
             <p><strong>Email:</strong> {{ request.user.email }}</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="auth-links">
+            <p><a href="{% url 'change_username' %}">Сменить имя пользователя</a></p>
         </div>
 
         <div class="divider"></div>
