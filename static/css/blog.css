@@ -18,16 +18,22 @@
     max-width: 768px; /* Ограничиваем ширину карточки */
 }
 
+/* --- КАРТОЧКА ЗАПИСИ БЛОГА — СОВРЕМЕННЫЙ ВИД --- */
 .post-card {
-    background: #F5F1ED;
-    border-radius: 10px;
+    background: #FFFFFF; /* Белый фон для чистоты и контраста */
+    border-radius: 12px; /* Чуть больше скругления — современнее */
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06); /* Лёгкая, но выразительная тень */
     display: flex;
     flex-direction: column;
     height: 100%;
-    border: 1px solid transparent;
-    transition: none; /* Отключаем все переходы */
+    border: 1px solid #E8E4E0; /* Тёплая светлая граница вместо transparent */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Плавность только при наведении */
+}
+
+.post-card:hover {
+    transform: translateY(-4px); /* Лёгкое "приподнимание" */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08); /* Усиление тени при наведении */
 }
 
 /* --- ЗАГОЛОВОК --- */
