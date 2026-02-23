@@ -1,0 +1,43 @@
+services:
+  - type: web
+    name: plaster-shop-web
+    runtime: python
+    region: oregon 
+    plan: free     
+    env: python
+    src: ./
+    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput"
+    startCommand: "gunicorn plaster_shop.wsgi:application"
+    envVars:
+      - key: DEBUG
+        value: False
+      - key: SECRET_KEY
+        fromSecret: SECRET_KEY
+      - key: DB_NAME
+        fromDatabaseCredential: databaseName
+      - key: DB_USER
+        fromDatabaseCredential: databaseUser
+      - key: DB_PASSWORD
+        fromDatabaseCredential: databasePassword
+      - key: DB_HOST
+        fromDatabaseCredential: databaseHost
+      - key: DB_PORT
+        value: 5432
+      - key: EMAIL_HOST_USER
+        fromSecret: EMAIL_HOST_USER
+      - key: EMAIL_HOST_PASSWORD
+        fromSecret: EMAIL_HOST_PASSWORD
+      - key: SOCIAL_AUTH_YANDEX_OAUTH2_KEY
+        fromSecret: SOCIAL_AUTH_YANDEX_OAUTH2_KEY
+      - key: SOCIAL_AUTH_YANDEX_OAUTH2_SECRET
+        fromSecret: SOCIAL_AUTH_YANDEX_OAUTH2_SECRET
+      - key: SOCIAL_AUTH_GOOGLE_OAUTH2_KEY
+        fromSecret: SOCIAL_AUTH_GOOGLE_OAUTH2_KEY
+      - key: SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET
+        fromSecret: SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET
+      - key: ALLOWED_HOSTS
+        value: plaster-shop-web.onrender.com,www.plaster-shop-web.onrender.com
+
+databases:
+  - name: plaster-shop-db
+    plan: free
