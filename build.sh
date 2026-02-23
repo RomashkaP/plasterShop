@@ -9,3 +9,10 @@ python manage.py collectstatic --no-input
 
 # Главное: применяем миграции базы данных
 python manage.py migrate
+
+# Создание суперпользователя (только если указана переменная CREATE_SUPERUSER)
+if [[ $CREATE_SUPERUSER]]; then
+echo 'Creating superuser...'
+python manage.py createsuperuser --no-input
+echo 'Superuser created successfully!'
+fi
