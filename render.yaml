@@ -31,12 +31,8 @@ services:
         fromSecret: SOCIAL_AUTH_YANDEX_OAUTH2_KEY
       - key: SOCIAL_AUTH_YANDEX_OAUTH2_SECRET
         fromSecret: SOCIAL_AUTH_YANDEX_OAUTH2_SECRET
-      - key: SOCIAL_AUTH_GOOGLE_OAUTH2_KEY
-        fromSecret: SOCIAL_AUTH_GOOGLE_OAUTH2_KEY
-      - key: SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET
-        fromSecret: SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET
       - key: ALLOWED_HOSTS
-        value: plaster-shop-web.onrender.com,www.plaster-shop-web.onrender.com
+        value: plastershop-1.onrender.com,www.plaster-shop-web.onrender.com
 
 databases:
   - name: plaster-shop-db
