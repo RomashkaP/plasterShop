@@ -196,3 +196,23 @@ LOGGING = {
         },
     },
 }
+
+# Настройки Yandex Cloud Storage
+if not DEBUG:  # Только для продакшена (Render)
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    
+    # Данные из твоего сервисного аккаунта
+    AWS_ACCESS_KEY_ID = os.getenv('YC_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.getenv('YC_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = os.getenv('YC_STORAGE_BUCKET_NAME')
+    AWS_S3_ENDPOINT_URL = 'https://storage.yandexcloud.net'
+    AWS_S3_REGION_NAME = 'ru-central1'  # Регион по умолчанию
+    
+    # Опциональные настройки
+    AWS_QUERYSTRING_AUTH = False  # Убирает подпись из URL (для публичного доступа)
+    AWS_DEFAULT_ACL = 'public-read'  # Публичный доступ к файлам
+    AWS_LOCATION = 'media'  # Папка внутри бакета (необязательно)
+    
+    # Настройки для корректной работы
+    AWS_S3_VERIFY = True
+    AWS_S3_ADDRESSING_STYLE = 'virtual'
