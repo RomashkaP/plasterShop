@@ -197,6 +197,7 @@ LOGGING = {
     },
 }
 
+# reset
 # Настройки Yandex Cloud Storage
 if not DEBUG:  # Только для продакшена (Render)
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
